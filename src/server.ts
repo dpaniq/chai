@@ -37,7 +37,7 @@ router.use(teaRouter.routes(), teaRouter.allowedMethods());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-console.log(`🚀 Server running at http://localhost:${PORT}`);
-console.log(`📘 Swagger docs at http://localhost:${PORT}/swagger`);
-console.log(`📘 Swagger OpenAPI at http://localhost:${PORT}/openapi.json`);
+console.log(`🚀 Server running at http://localhost:${PORT}/api`);
+console.log(`📘 Swagger docs at http://localhost:${PORT}/api/swagger`);
+console.log(`📘 Swagger OpenAPI at http://localhost:${PORT}/api/openapi.json`);
 await app.listen({ port: PORT });

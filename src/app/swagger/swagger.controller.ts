@@ -12,7 +12,6 @@ router.get("/openapi.json", (ctx) => {
 router.get("/swagger", async (ctx) => {
   // convert file URL to OS-native path to avoid leading-slash on Windows
   const publicDir = fromFileUrl(new URL("../../../public", import.meta.url));
-  console.log(Deno.cwd(), publicDir);
   try {
     await send(ctx, "swagger.html", { root: publicDir, index: "swagger.html" });
   } catch (e) {
