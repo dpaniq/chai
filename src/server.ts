@@ -1,12 +1,16 @@
 import { oakCors } from "cors";
+import "dotenv/load";
 import { send } from "oak";
 
-// prettier-ignore
+import env from "./env.ts";
 import { app, router } from "./singletones.ts";
 
+import { requestLogger } from "./app/middlewares/request-logger.middleware.ts";
 import swaggerRouter from "./app/swagger/swagger.controller.ts";
 import { PORT } from "./constants.ts";
 import teaRouter from "./entities/tea/tea.controller.ts";
+
+console.log(env);
 
 // Static file middleware
 app.use(async (context, next) => {
@@ -33,6 +37,9 @@ app.use(oakCors());
 
 router.use(swaggerRouter.routes(), swaggerRouter.allowedMethods());
 router.use(teaRouter.routes(), teaRouter.allowedMethods());
+
+// Middlewares
+app.use(requestLogger());
 
 app.use(router.routes());
 app.use(router.allowedMethods());

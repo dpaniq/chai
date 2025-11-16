@@ -1,32 +1,10 @@
 import { Router } from "oak";
-import { CreateTeaSchema, type Tea } from "./tea.schema.ts";
+import routerV1 from "./v1/tea-v1.controller.ts";
+import routerV2 from "./v2/tea-v2.controller.ts";
 
-const router = new Router({ prefix: "/v1/tea" });
+const router = new Router();
 
-const tea: Tea[] = [];
-
-router
-  .get("/", (ctx) => {
-    ctx.response.body = tea;
-  })
-  .post("/", async (ctx) => {
-    const body = ctx.request.body({ type: "json" });
-    const data = await body.value;
-
-    const parsed = CreateTeaSchema.safeParse(data);
-    if (!parsed.success) {
-      ctx.response.status = 400;
-      ctx.response.body = { error: parsed.error.format() };
-      return;
-    }
-
-    const newTea: Tea = {
-      id: crypto.randomUUID(),
-      ...parsed.data,
-    };
-    tea.push(newTea);
-    ctx.response.status = 201;
-    ctx.response.body = newTea;
-  });
+router.use(routerV1.routes(), routerV1.allowedMethods());
+router.use(routerV2.routes(), routerV2.allowedMethods());
 
 export default router;
