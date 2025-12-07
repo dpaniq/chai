@@ -78,4 +78,27 @@ registry.registerPath({
   },
 });
 
+registry.registerPath({
+  method: "get",
+  path: "/v2/tea/{id}",
+  summary: "Get tea by ID",
+  tags: ["Tea V2"],
+  operationId: "getTeaById",
+  deprecated: false,
+  description: "Retrieve a tea item by --its ID-- page ID",
+  parameters: [
+    { in: "path", name: "id", required: true, schema: { type: "string" } },
+  ],
+  responses: {
+    200: {
+      description: "A tea item",
+      content: {
+        "application/json": {
+          schema: { $ref: "#/components/schemas/Tea V2" },
+        },
+      },
+    },
+  },
+});
+
 export default registry;

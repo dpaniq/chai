@@ -14,6 +14,10 @@ routerV2
   .get("/", async (ctx) => {
     console.log(ctx);
     ctx.response.body = await teaV2Service.findAll();
+  })
+  .get("/:id", async (ctx) => {
+    const id = ctx.params.id!;
+    ctx.response.body = await teaV2Service.findById(id);
   });
 
 export default routerV2;

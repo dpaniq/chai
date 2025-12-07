@@ -18,9 +18,9 @@ const defaultLogger = (level: LogLevel, msg: string) => {
 };
 
 const redact = (headers: Headers, toRedact: string[] = []) => {
-  if (!toRedact.length) return Object.fromEntries(headers);
+  if (!toRedact.length) return Object.fromEntries(headers as any);
   const redacted: Record<string, string> = {};
-  for (const [k, v] of headers) {
+  for (const [k, v] of headers as any) {
     redacted[k] = toRedact.includes(k.toLowerCase()) ? "<redacted>" : v;
   }
   return redacted;
@@ -65,7 +65,7 @@ export function requestLogger(opts: LogOptions = {}) {
       logger(
         "error",
         `<-- ${method} ${url} ${status} ${ms}ms from=${remoteAddr} error=${
-          (err && err.message) || String(err)
+          (err && (err as any).message) || String(err)
         }`
       );
       // keep original behavior: rethrow so upstream handlers / Oak can handle

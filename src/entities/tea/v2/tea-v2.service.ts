@@ -19,4 +19,8 @@ export class TeaV2Service {
       data_source_id: this.dataSourceId,
     });
   }
+
+  async findById(id: string) {
+    return await notionAPI.pages.retrieve({ page_id: id });
+  }
 }
