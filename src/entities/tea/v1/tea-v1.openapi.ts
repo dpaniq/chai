@@ -1,5 +1,6 @@
 import { registry } from "../../../singletones.ts";
 import {
+  PageSchema,
   TeaDatabaseSchema,
   TeaDataSourceQuerySchema,
   TeaDataSourceSchema,
@@ -9,6 +10,7 @@ import {
 registry.register("TeaDatabaseV1", TeaDatabaseSchema);
 registry.register("TeaDataSourceV1", TeaDataSourceSchema);
 registry.register("TeaDataSourceQueryV1", TeaDataSourceQuerySchema);
+registry.register("PageSchema", PageSchema);
 
 // Define endpoints
 registry.registerPath({
@@ -17,7 +19,7 @@ registry.registerPath({
   summary: "Info about tea DB",
   tags: ["Tea"],
   operationId: "getTeaDataBaseV1",
-  deprecated: true,
+  // deprecated: true,
   description: "Retrieve a database info",
   responses: {
     200: {
@@ -39,7 +41,7 @@ registry.registerPath({
   summary: "Info about tea Data Source",
   tags: ["Tea"],
   operationId: "getTeaDataSourceV1",
-  deprecated: true,
+  // deprecated: true,
   description: "Retrieve a data source info",
   responses: {
     200: {
@@ -61,7 +63,7 @@ registry.registerPath({
   summary: "Info about tea Data Source Query",
   tags: ["Tea"],
   operationId: "getTeaDataSourceQueryV1",
-  deprecated: true,
+  // deprecated: true,
   description: "Retrieve a data source query",
   responses: {
     200: {
@@ -70,7 +72,37 @@ registry.registerPath({
         "application/json": {
           schema: {
             $ref: "#/components/schemas/TeaDataSourceQueryV1",
+            type: "object",
           },
+        },
+      },
+    },
+  },
+});
+
+registry.registerPath({
+  method: "get",
+  path: "/v1/tea/page/{id}",
+  summary: "Get tea by page ID",
+  tags: ["Tea"],
+  operationId: "getTeaById",
+  deprecated: false,
+  description: "Retrieve a tea item page ID",
+  parameters: [
+    {
+      in: "path",
+      name: "id",
+      required: true,
+      schema: { type: "string" },
+      description: "page_id",
+    },
+  ],
+  responses: {
+    200: {
+      description: "A tea page item",
+      content: {
+        "application/json": {
+          schema: { $ref: "#/components/schemas/PageSchema", type: "object" },
         },
       },
     },

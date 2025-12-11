@@ -9,6 +9,7 @@
     "npm:@asteasolutions/zod-to-openapi@8.1.0": "8.1.0_zod@4.1.12",
     "npm:@notionhq/client@^5.4.0": "5.4.0",
     "npm:envalid@^8.1.1": "8.1.1",
+    "npm:notion-types@^7.7.1": "7.7.1",
     "npm:zod@4.1.12": "4.1.12"
   },
   "jsr": {
@@ -51,6 +52,9 @@
       "dependencies": [
         "tslib"
       ]
+    },
+    "notion-types@7.7.1": {
+      "integrity": "sha512-565D6k9rjRomec063p17iZe93ixhcomoDXy7K/Eq7t5826MUiU+g3IJiykoiDbBgx+cxn/4JHaHZIux+DYv74g=="
     },
     "openapi3-ts@4.5.0": {
       "integrity": "sha512-jaL+HgTq2Gj5jRcfdutgRGLosCy/hT8sQf6VOy+P+g36cZOjI1iukdPnijC+4CmeRzg/jEllJUboEic2FhxhtQ==",
@@ -249,6 +253,7 @@
       "npm:@asteasolutions/zod-to-openapi@8.1.0",
       "npm:@notionhq/client@^5.4.0",
       "npm:envalid@^8.1.1",
+      "npm:notion-types@^7.7.1",
       "npm:zod@4.1.12"
     ]
   }

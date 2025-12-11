@@ -12,8 +12,15 @@ routerV1
     ctx.response.body = await teaV1Service.getDataSource();
   })
   .get("/data-source-query", async (ctx) => {
-    console.log(ctx);
     ctx.response.body = await teaV1Service.getDataSourceQuery();
+  })
+  .get("/page/:id", async (ctx) => {
+    const id = ctx.params.id!;
+    ctx.response.body = await teaV1Service.findByPageId(id);
+  })
+  .get("/:id", async (ctx) => {
+    const id = ctx.params.id!;
+    ctx.response.body = await teaV1Service.findById(id);
   });
 
 export default routerV1;

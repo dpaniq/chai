@@ -11,13 +11,18 @@ routerV2
   .get("/data-source", async (ctx) => {
     ctx.response.body = await teaV2Service.getDataSource();
   })
-  .get("/", async (ctx) => {
+  .get("/data-source-query", async (ctx) => {
     console.log(ctx);
-    ctx.response.body = await teaV2Service.findAll();
+    ctx.response.body = await teaV2Service.getDataSourceQuery();
   })
-  .get("/:id", async (ctx) => {
+  .get("/page/:id", async (ctx) => {
     const id = ctx.params.id!;
-    ctx.response.body = await teaV2Service.findById(id);
+    ctx.response.body = await teaV2Service.findByPageId(id);
+    console.info("OK");
   });
+// .get("/:id", async (ctx) => {
+//   const id = ctx.params.id!;
+//   ctx.response.body = await teaV2Service.findById(id);
+// });
 
 export default routerV2;

@@ -1,5 +1,7 @@
 export {
+  PageSchema,
   TeaDataSourceQuerySchema,
+  type Page,
   type TeaDataSourceQuery,
 } from "./tea-data-source-query.schema.ts";
 

@@ -72,9 +72,23 @@ const PagePropertySchema = z.union([
   RelationPropertySchema,
 ]);
 
-const PropertiesRecord = z.record(z.string(), PagePropertySchema);
+const PropertiesRecord = z.record(
+  z.enum([
+    "Temperature",
+    "Tea_base_color",
+    "Tested",
+    "Proliv duration",
+    "Tea_types",
+    "Tea_origin",
+    "Tea_supplier",
+    "Tea_name_meaning",
+    "Assortment",
+    "Tea_name",
+  ]),
+  PagePropertySchema
+);
 
-const PageSchema = z.object({
+export const PageSchema = z.object({
   object: z.literal("page"),
   id: z.uuid(),
   created_time: z
@@ -115,4 +129,5 @@ export const TeaDataSourceQuerySchema = z
     },
   });
 
+export type Page = z.infer<typeof PageSchema>;
 export type TeaDataSourceQuery = z.infer<typeof TeaDataSourceQuerySchema>;

@@ -45,7 +45,7 @@ registry.registerPath({
         "application/json": {
           schema: {
             type: "array",
-            items: { $ref: "#/components/schemas/Tea V2" },
+            items: { $ref: "#/components/schemas/TeaDataSourceV1" },
             uniqueItems: true,
           },
         },
@@ -56,8 +56,8 @@ registry.registerPath({
 
 registry.registerPath({
   method: "get",
-  path: "/v2/tea",
-  summary: "List all tea",
+  path: "/v2/tea/data-source-query",
+  summary: "Info about tea Data Source Query",
   tags: ["Tea V2"],
   operationId: "getTea",
   deprecated: false,
@@ -69,7 +69,7 @@ registry.registerPath({
         "application/json": {
           schema: {
             type: "array",
-            items: { $ref: "#/components/schemas/Tea V2" },
+            items: { $ref: "#/components/schemas/TeaDataSourceQueryV1" },
             uniqueItems: true,
           },
         },
@@ -80,21 +80,27 @@ registry.registerPath({
 
 registry.registerPath({
   method: "get",
-  path: "/v2/tea/{id}",
-  summary: "Get tea by ID",
+  path: "/v2/tea/page/{id}",
+  summary: "Get tea by page ID",
   tags: ["Tea V2"],
   operationId: "getTeaById",
   deprecated: false,
-  description: "Retrieve a tea item by --its ID-- page ID",
+  description: "Retrieve a tea item by page ID",
   parameters: [
-    { in: "path", name: "id", required: true, schema: { type: "string" } },
+    {
+      in: "path",
+      name: "id",
+      required: true,
+      schema: { type: "string" },
+      description: "page_id",
+    },
   ],
   responses: {
     200: {
-      description: "A tea item",
+      description: "A tea page item",
       content: {
         "application/json": {
-          schema: { $ref: "#/components/schemas/Tea V2" },
+          schema: { $ref: "#/components/schemas/PageSchema" },
         },
       },
     },

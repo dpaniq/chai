@@ -1,26 +1,36 @@
+import {
+  GetDatabaseResponse,
+  GetDataSourceResponse,
+  GetPageResponse,
+  QueryDataSourceResponse,
+} from "@notionhq/client";
 import { notionAPI } from "../../../singletones.ts";
 
+const TEA_V2_ID = "28018fb6661780389786d94181b9f252";
+const TEA_V2_DATA_SOURCE_ID = "28018fb6-6617-8047-86c4-000b31687bc9";
+
 export class TeaV2Service {
-  private readonly dbId = "27918fb6-6617-800f-8a5d-ea7dc359a1f9";
-  private readonly dataSourceId = "27918fb6-6617-819a-a82a-000bc4f88dae";
-
-  async getDatabase() {
-    return await notionAPI.databases.retrieve({ database_id: this.dbId });
+  async getDatabase(): Promise<GetDatabaseResponse> {
+    return await notionAPI.databases.retrieve({ database_id: TEA_V2_ID });
   }
 
-  async getDataSource() {
+  async getDataSource(): Promise<GetDataSourceResponse> {
     return await notionAPI.dataSources.retrieve({
-      data_source_id: this.dataSourceId,
+      data_source_id: TEA_V2_DATA_SOURCE_ID,
     });
   }
 
-  async findAll() {
+  async getDataSourceQuery(): Promise<QueryDataSourceResponse> {
     return await notionAPI.dataSources.query({
-      data_source_id: this.dataSourceId,
+      data_source_id: TEA_V2_DATA_SOURCE_ID,
     });
   }
 
-  async findById(id: string) {
+  async findByPageId(id: string): Promise<GetPageResponse> {
     return await notionAPI.pages.retrieve({ page_id: id });
   }
+
+  // async findById(id: string) {
+  //   return await notionAPI.pages.retrieve({ page_id: id });
+  // }
 }
